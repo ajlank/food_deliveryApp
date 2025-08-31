@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class Styles {
   static final BoxDecoration boxDec = BoxDecoration(
@@ -22,5 +21,9 @@ class Styles {
   static const TextStyle homeBigText = TextStyle(
     color: Colors.white,
     fontSize: 28,
+  );
+  static const TextStyle offerPannelText = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
   );
 }
