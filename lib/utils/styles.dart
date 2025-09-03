@@ -26,4 +26,15 @@ class Styles {
     fontSize: 18,
     fontWeight: FontWeight.bold,
   );
+
+  static const TextStyle foodNameStyle1 = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    backgroundColor: Color.fromARGB(18, 2, 2, 2),
+  );
+  static const TextStyle foodNameStyle2 = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.w400,
+    backgroundColor: Color.fromARGB(18, 2, 2, 2),
+  );
 }

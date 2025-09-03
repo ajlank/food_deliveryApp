@@ -3,21 +3,19 @@ import 'package:foodapp/bottomNavViews/home_view.dart';
 import 'package:foodapp/bottomNavViews/offer_view.dart';
 import 'package:foodapp/bottomNavViews/order_view.dart';
 import 'package:foodapp/bottomNavViews/profile_view.dart';
+import 'package:foodapp/bottomNavViews/widgets/foodWidget/menu_details.dart';
 import 'package:foodapp/bottomNavViews/wishlist_view.dart';
 import 'package:foodapp/uiController/getXController/home_view_controller.dart';
-import 'package:foodapp/uiController/home_view_notifier.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
+import 'package:foodapp/utils/routes.dart';
+import 'package:foodapp/views/auth/login_view.dart';
+import 'package:foodapp/views/auth/sign_up_view.dart';
 
-void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => HomeViewNotifier()),
-      ],
-      child: const MyApp(),
-    ),
-  );
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
+void main() async {
+  await GetStorage.init();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -32,11 +30,32 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: MyHomeView(),
+      home: ViewController(),
+      routes: {
+        loginRoute: (context) => LoginView(),
+        signUpRoute: (context) => SignUpView(),
+        homeRoute: (context) => MyHomeView(),
+        menuDetailsRoute: (context) => MenuDetails(),
+      },
     );
   }
 }
 
+class ViewController extends StatelessWidget {
+  const ViewController({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final accessToken = GetStorage().read('accessToken');
+    if (accessToken != null) {
+      return MyHomeView();
+    } else {
+      return SignUpView();
+    }
+  }
+}
+
+//main View
 class MyHomeView extends StatefulWidget {
   const MyHomeView({super.key});
 

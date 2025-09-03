@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/homeCategory/model/category_model.dart';
 
-class FoodTab extends StatefulWidget {
-  const FoodTab({super.key, required this.food});
-  final MapEntry<String, dynamic> food;
-
-  @override
-  State<FoodTab> createState() => _FoodTabState();
-}
-
-class _FoodTabState extends State<FoodTab> {
+class FoodCategoryTab extends StatelessWidget {
+  const FoodCategoryTab({super.key, required this.item});
+  final CategoryModel? item;
   @override
   Widget build(BuildContext context) {
-    final item = widget.food.value[0];
-
     return Container(
       margin: EdgeInsets.only(left: 12),
-      height: 50,
-      width: 102,
+      height: 51,
+
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -26,9 +19,10 @@ class _FoodTabState extends State<FoodTab> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CircleAvatar(backgroundImage: AssetImage(item['img'])),
+            CircleAvatar(backgroundImage: NetworkImage(item!.imageUrl)),
+            SizedBox(width: 2),
             Text(
-              item['Name'],
+              item!.title,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
             ),
           ],

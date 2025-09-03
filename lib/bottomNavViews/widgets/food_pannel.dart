@@ -1,45 +1,30 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:foodapp/bottomNavViews/widgets/foodpannelwidget/food_tab.dart';
+import 'package:foodapp/homeCategory/hooks/fetch/fetch_category.dart';
 
-class FoodPannel extends StatefulWidget {
+class FoodPannel extends HookWidget {
   const FoodPannel({super.key});
 
   @override
-  State<FoodPannel> createState() => _FoodPannelState();
-}
-
-class _FoodPannelState extends State<FoodPannel> {
-  List foodList = foodPannel.entries.toList();
-  @override
   Widget build(BuildContext context) {
+    final result = fetchCategory();
+    final categories = result.categories;
+    final isLoading = result.isLoading;
+    final error = result.error;
+
+    if (isLoading) {
+      return CircularProgressIndicator();
+    }
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 22),
-        child: Row(
-          children: List.generate(foodList.length, (i) {
-            var foodItem = foodList[i];
-
-            return FoodTab(food: foodItem);
-          }),
-        ),
+      child: Row(
+        children: List.generate(categories.length, (i) {
+          final item = categories[i];
+          return FoodCategoryTab(item: item);
+        }),
       ),
     );
   }
 }
-
-Map<String, dynamic> foodPannel = {
-  "first": [
-    {'Name': 'Burger', 'img': 'lib/assets/burger.jpg'},
-  ],
-  "second": [
-    {'Name': 'Pizza', 'img': 'lib/assets/pizza.png'},
-  ],
-  "third": [
-    {'Name': 'Sushi', 'img': 'lib/assets/sushi.jpg'},
-  ],
-  "fourth": [
-    {'Name': 'Fries', 'img': 'lib/assets/fries.jpg'},
-  ],
-};

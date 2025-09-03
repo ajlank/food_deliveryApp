@@ -4,21 +4,22 @@ import 'package:foodapp/bottomNavViews/widgets/food_pannel.dart';
 import 'package:foodapp/bottomNavViews/widgets/home_top_widget.dart';
 import 'package:foodapp/bottomNavViews/widgets/offer_pannel.dart';
 import 'package:foodapp/common/reusable_header.dart';
+import 'package:foodapp/views/auth/sign_up_view.dart';
+import 'package:get_storage/get_storage.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  @override
   Widget build(BuildContext context) {
+    final accessToken = GetStorage().read('accessToken');
+    if (accessToken == null) {
+      return SignUpView();
+    }
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: SizedBox(
-        width: double.infinity,
+        // width: double.infinity,
         child: Column(
           children: [
             HomeTopWidget(),

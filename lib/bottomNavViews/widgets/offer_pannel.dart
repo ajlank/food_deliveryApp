@@ -52,7 +52,7 @@ class OfferPannel extends StatelessWidget {
 
             Column(
               children: [
-                Container(
+                SizedBox(
                   width: 166.0,
                   height: 160,
                   child: Padding(
