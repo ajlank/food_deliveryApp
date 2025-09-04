@@ -23,7 +23,7 @@ class FoodCardList extends StatelessWidget {
         child: Container(
           child: Stack(
             children: [
-              Container(
+              SizedBox(
                 height: 200,
                 child: ClipRRect(
                   borderRadius: BorderRadiusGeometry.circular(22),
