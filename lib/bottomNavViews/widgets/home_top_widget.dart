@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:foodapp/address/hooks/fetch/fetch_default_address.dart';
+import 'package:foodapp/bottomNavViews/widgets/homeTopPannel/home_top_pannel.dart';
+import 'package:foodapp/utils/routes.dart';
 import 'package:foodapp/utils/styles.dart';
 
-class HomeTopWidget extends StatelessWidget {
+class HomeTopWidget extends HookWidget {
   const HomeTopWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final result = fetchDefaultAddress();
+    final isLoading = result.isLoading;
+    final error = result.error;
+
+    if (isLoading) {
+      return CircularProgressIndicator();
+    }
+    final address = result.address?.address ?? 'No address found';
+
     return Container(
-      // height: 250,
       decoration: BoxDecoration(
         color: Colors.black,
         borderRadius: BorderRadius.only(
@@ -48,7 +60,7 @@ class HomeTopWidget extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              'Sterling place,Vrooklyn',
+                              address.toString(),
                               style: Styles.homeTopHeaderBottomLocation,
                             ),
                           ],
@@ -62,14 +74,7 @@ class HomeTopWidget extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Container(
-                          padding: EdgeInsets.all(8),
-                          decoration: Styles.boxDec,
-                          child: Icon(
-                            Icons.shopping_cart,
-                            color: Styles.textWhiteColor,
-                          ),
-                        ),
+                        HomeTopPannel(),
                         SizedBox(width: 12),
                         Container(
                           padding: EdgeInsets.all(8),

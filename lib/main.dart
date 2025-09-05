@@ -5,6 +5,7 @@ import 'package:foodapp/bottomNavViews/order_view.dart';
 import 'package:foodapp/bottomNavViews/profile_view.dart';
 import 'package:foodapp/bottomNavViews/widgets/foodWidget/menu_details.dart';
 import 'package:foodapp/bottomNavViews/wishlist_view.dart';
+import 'package:foodapp/cart/views/cart_views.dart';
 import 'package:foodapp/uiController/getXController/home_view_controller.dart';
 import 'package:foodapp/utils/routes.dart';
 import 'package:foodapp/views/auth/login_view.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         signUpRoute: (context) => SignUpView(),
         homeRoute: (context) => MyHomeView(),
         menuDetailsRoute: (context) => MenuDetails(),
+        cartRoute: (context) => CartViews(),
       },
     );
   }

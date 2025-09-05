@@ -16,7 +16,7 @@ class SuggestionsTab extends StatelessWidget {
           ),
         ),
 
-        Container(
+        SizedBox(
           width: 100,
           child: Text(
             item.title,
